@@ -1,0 +1,19 @@
+{
+  "name": "YoldaYakala — Seyahat Günlüğü ve Haritası",
+  "short_name": "YoldaYakala",
+  "description": "Gittiğin her yer sisli dünyayı aydınlatır. Seyahat haritası, şehir rehberi, dijital pasaport ve rozetler.",
+  "lang": "tr",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#050b0a",
+  "theme_color": "#07100f",
+  "categories": ["travel", "lifestyle"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
