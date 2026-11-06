@@ -4,7 +4,7 @@ const VERSION = '11322b379e';
 const APP = 'yy-app-' + VERSION;
 const TILES = 'yy-tiles-v1';
 const GUIDE = 'yy-guide-v1';
-const ASSETS = ["./assets/abril-fatface-latin-ext-400-normal-C5FI7UIy.woff2","./assets/abril-fatface-latin-400-normal-Bld6cQVQ.woff2","./assets/barlow-latin-ext-400-normal-DsA6LmuC.woff2","./assets/logo-128-mXeBxhFM.webp","./assets/logo-512-DzBdT5fc.webp","./assets/barlow-latin-400-normal-CtwdMZP0.woff2","./assets/barlow-latin-ext-700-normal-sk8_kpF-.woff2","./assets/barlow-latin-700-normal-Bku5AOSK.woff2","./assets/barlow-condensed-latin-600-normal-BN11TKSn.woff2","./assets/barlow-condensed-latin-ext-600-normal-DEVAjXQy.woff2","./assets/barlow-latin-ext-600-normal-Brs4HSvV.woff2","./assets/barlow-latin-600-normal-DMnFtVx9.woff2","./assets/maplibre-2Cf-5a7S.css","./assets/index-BYV_gEhR.css","./assets/three-CKHCukkA.js","./assets/cities-BBcyJVcz.js","./assets/maplibre-TWgQ9Yuf.js","./assets/turf-CvUHM9PB.js","./assets/index-kPfoabUL.js","./assets/Passport-C5VVtZkV.js","./assets/Profile-DF2L_ztt.js","./assets/Wishlist-DIM665Nx.js","./assets/PhotoImport-BEKqwag4.js","./assets/cityMap-HlflsR3R.js","./assets/world-og_Rt1_e.js","./assets/landWorker-C08gotk7.js","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png","./icons/maskable-512.png","./icons/apple-180.png","./icons/favicon-64.png","./icons/favicon-boot.webp"];
+const ASSETS = ["./assets/barlow-latin-ext-400-normal-DsA6LmuC.woff2","./assets/barlow-latin-400-normal-CtwdMZP0.woff2","./assets/abril-fatface-latin-ext-400-normal-C5FI7UIy.woff2","./assets/logo-128-mXeBxhFM.webp","./assets/logo-512-DzBdT5fc.webp","./assets/abril-fatface-latin-400-normal-Bld6cQVQ.woff2","./assets/barlow-latin-ext-600-normal-Brs4HSvV.woff2","./assets/barlow-latin-600-normal-DMnFtVx9.woff2","./assets/barlow-latin-ext-700-normal-sk8_kpF-.woff2","./assets/barlow-latin-700-normal-Bku5AOSK.woff2","./assets/barlow-condensed-latin-ext-600-normal-DEVAjXQy.woff2","./assets/barlow-condensed-latin-600-normal-BN11TKSn.woff2","./assets/maplibre-2Cf-5a7S.css","./assets/index-BYV_gEhR.css","./assets/three-CKHCukkA.js","./assets/cities-BBcyJVcz.js","./assets/maplibre-TWgQ9Yuf.js","./assets/turf-CvUHM9PB.js","./assets/index-kPfoabUL.js","./assets/Passport-C5VVtZkV.js","./assets/Profile-DF2L_ztt.js","./assets/Wishlist-DIM665Nx.js","./assets/PhotoImport-BEKqwag4.js","./assets/cityMap-HlflsR3R.js","./assets/world-og_Rt1_e.js","./assets/landWorker-C08gotk7.js","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png","./icons/maskable-512.png","./icons/apple-180.png","./icons/favicon-64.png","./icons/favicon-boot.webp"];
 const MAX_TILES = 1500;
 
 self.addEventListener('install', e => {
@@ -23,7 +23,8 @@ self.addEventListener('fetch', e => {
 
   // Sayfa: önce ağ (güncelleme gelsin), çevrimdışıysa önbellekteki uygulama
   if (req.mode === 'navigate') {
-    e.respondWith(fetch(req).then(r => { const copy = r.clone(); caches.open(APP).then(c => c.put('./', copy)); return r; })
+    // cache:'no-cache' → tarayıcının HTTP önbelleğini (GitHub Pages max-age=600) atla, güncelleme hemen gelsin
+    e.respondWith(fetch(req, { cache: 'no-cache' }).then(r => { const copy = r.clone(); caches.open(APP).then(c => c.put('./', copy)); return r; })
       .catch(() => caches.match('./', { cacheName: APP })));
     return;
   }
